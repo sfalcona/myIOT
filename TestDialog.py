@@ -47,7 +47,7 @@ FSM.addPath('EsperoObjeto', myFSM.myOptions('Accion', callBack2, 'EsperoObjeto')
 FSM.addPath('EsperoObjeto', myFSM.myOptions('Pregunta', callBack1, 'EsperoAccion'))
 
 
-#Testeo
+#Testeo commit desde PC
 FSM.printFSM()
 
 
