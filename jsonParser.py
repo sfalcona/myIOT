@@ -82,7 +82,7 @@ class myDiaLogic:
 
 
 
-
+#Esto de acá lo comenté ayer porque parecía que solo era un ejemplo de como está estructurado el json
 
 '''
 myData = {
