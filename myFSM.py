@@ -65,9 +65,7 @@ class myFSM:
        
 
 
-''' Ejemplo 
-
-        
+''' Ejemplo de uso      
         
 def printA():
     print(' ')
