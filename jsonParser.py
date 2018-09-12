@@ -81,7 +81,21 @@ class myDiaLogic:
 		
 
 
+<<<<<<< HEAD
 # Ejemplo de json recibido
+=======
+
+
+
+
+#mira esto
+
+
+
+
+
+#Esto de acá lo comenté ayer porque parecía que solo era un ejemplo de como está estructurado el json
+>>>>>>> 84e9ec5ab3b50ed91175b67b39d62695af48f781
 
 '''
 myData = {
