@@ -6,26 +6,31 @@ import json
 import random
 import myFSM
 import jsonParser
+import mqttDriver
 
 
-def callBack3():
-    print('Voy a checkar un estado')
+mqttIp = 'ACA PONGO LA IP'
 
-def callBack4():
-    print('Voy a setear un estado')
+# Todavia no se bien como armar este callback
+
+topic = ''
+msg = ''
+
+def messageCallback(client, userdata, message):
+    topic = message.topic
+    msg = message.payload
 
 
-def callBack1():
-    print('Me llego una pregunta')
 
-def callBack2():
-    print('Me llego una orden')
+
+
+
+mqttClient = mqttDriver.mqttClient(mqttIp, messageCallback)
 
 
 
 myLogic = jsonParser.myDiaLogic(checkCallback = callBack3,setCallback = callBack4)
 FSM = myFSM.myFSM()
-
 
 #Creo estados
 FSM.addState('Idle')

@@ -15,7 +15,7 @@ class mqttClient(self):
 	'''Servidor de mqtt utilizando la biblioteca paho. No gano mucho, es muy basado en la 
 	biblioteca.
 	'''
-	def setClient(self,serverIp,serverPort=1883,userName = 'RPi', messageCallback = None):
+	def setClient(self, serverIp, serverPort = 1883, userName = 'RPi', messageCallback = None):
 		'''Instancia de cliente Mosquitto
 		ServerPort por default es 1883 (standard de mqtt)
 		userName y pwd por ahora no tienen importancia
@@ -35,7 +35,7 @@ class mqttClient(self):
 		'''
 		return = mqtt.publish(topic, payload, qos, retain)
 
-	def subscribe(self, topic, qos =0):
+	def subscribe(self, topic, qos = 0):
 		'''Me subscribo a un topico'''
 		mqtt.subscribe(topic, qos)
 
