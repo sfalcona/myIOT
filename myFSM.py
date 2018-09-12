@@ -10,7 +10,6 @@ class myOptions:
         self.__init__(event, callback, nextState)
 
 
-
 class myFSM:
     '''Maquina de estados finitos simple.'''
     def __init__(self):
@@ -36,7 +35,6 @@ class myFSM:
             self.currState = state
         except KeyError:
             raise KeyError ("No hay ningun estado con ese nombre en la FSM.")
-        
         
     def printFSM(self):
         '''Funcion para visualizar de manera mas practica la FSM'''

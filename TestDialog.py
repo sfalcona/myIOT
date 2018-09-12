@@ -58,6 +58,7 @@ def jsonPPrint(filename):
     print(json.dumps(data,indent=4,sort_keys = True))
 
 class S(http.server.BaseHTTPRequestHandler):
+    '''Servidor HTTP'''
     def _set_headers(self):
         self.send_response(200)
         self.send_header('Content-type', 'text/html')
@@ -96,8 +97,10 @@ def run(server_class=http.server.HTTPServer, handler_class=S, port=80):
     print ('Server starting at ' + str(server_address[0]) + ':' + str(port))
     httpd.serve_forever()
 
+
 if __name__ == "__main__":
     from sys import argv
+
 
 if len(argv) == 2:
     run(port=int(argv[1]))

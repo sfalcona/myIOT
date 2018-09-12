@@ -15,12 +15,16 @@ class myDiaLogic:
         self.obj = obj
         self.lastAction, self.lastRoom, self.lastState, self.lastObjetct = '','','',''
         self.action, self.room, self.dia, self.hour, self.object, self.state = '','','','','',''
+        self.event = ''
+
     def addRoom(self,room):
         '''Agrego habitaciones.'''
         self.rooms.append(room)
+
     def addObj(self,obj):
         '''Agrego objetos.'''
         self.obj.append(obj)
+
     def removeRoom(self,room):
         '''Remuevo habitaciones.'''
         try:
@@ -28,6 +32,7 @@ class myDiaLogic:
             return 1
         except ValueError:
             return 'Room not in list.'
+
     def removeObj(self,Obj):
         '''Remuevo objetos.'''
         try:
@@ -35,6 +40,7 @@ class myDiaLogic:
             return 1
         except ValueError:
             return 'Object not in list.'
+
     def queryParser(self, jsonObj):
         '''Levanto informacion util del json correspondiente al fulfillment.
 	Para cada campo me fijo si el query esta vacio o no, y en el caso de estarlo
@@ -43,8 +49,10 @@ class myDiaLogic:
 	'''
         try:
             self.action = jsonObj["queryResult"]["parameters"]['Acciones']
+            self.event = 'Accion'
         except KeyError:
             self.action = self.lastAction
+            self.event = 'Pregunta'
         try:
             self.room = jsonObj["queryResult"]["parameters"]['Rooms']
         except KeyError:
@@ -66,23 +74,14 @@ class myDiaLogic:
         except KeyError:
             self.state = self.lastState
         self.lastAction, self.lastRoom, self.lastState, self.lastObject = self.action, self.room, self.state,self.object
+        
     def responseCreator(self):
         '''Diseno el contenido a enviar como respuesta en un request POST para continuar el dialogo con la aplicacion.'''
         response = {"fulfillmentText": "Esto es un mensaje nuevo"}
 		
 
 
-
-
-
-
-#mira esto
-
-
-
-
-
-
+# Ejemplo de json recibido
 
 '''
 myData = {
