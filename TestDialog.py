@@ -11,8 +11,7 @@ import mqttDriver
 
 mqttIp = 'ACA PONGO LA IP'
 
-# Todavia no se bien como armar este callback
-
+# Callback para mensajes de mqtt, todavia no se bien como armar este callback jaja xd
 topic = ''
 msg = ''
 
@@ -21,15 +20,33 @@ def messageCallback(client, userdata, message):
     msg = message.payload
 
 
+# Callbacks para la FSM
+def idle2EspObj():
+
+def idle2EspAcc():
+
+def espAcc2EspAcc():
+
+def espAcc2EspObj():
+
+def espObj2EspObj():
+
+def espObj2EspAcc():
+
+# Callbacks para mqtt ( en este caso checkCallback es  messageCallback)
+def checkCallback():
+    messageCallback()
+
+def setCallback(): # Aca tambien tengo quilombos por que el seteo necesita parametros y el callback no recibe
+    # Aca iria un mqttClient.publish(algo)
+    
 
 
-
-
+# Una vez definidos los callbacks y el IP creo el cliente
 mqttClient = mqttDriver.mqttClient(mqttIp, messageCallback)
 
-
-
-myLogic = jsonParser.myDiaLogic(checkCallback = callBack3,setCallback = callBack4)
+# Una vez definidos los callbacks genero la FSM
+myLogic = jsonParser.myDiaLogic(checkCallback = checkCallback,setCallback = setCallback)
 FSM = myFSM.myFSM()
 
 #Creo estados
