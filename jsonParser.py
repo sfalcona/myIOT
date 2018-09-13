@@ -1,5 +1,6 @@
 import json
 
+# Cambiar room y obj [] por dir {}
 
 class myDiaLogic:
     '''Generador de respuestas para Fulfillments de Dialogflow.'''
