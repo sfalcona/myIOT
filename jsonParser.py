@@ -3,29 +3,27 @@ import json
 
 class myDiaLogic:
     '''Generador de respuestas para Fulfillments de Dialogflow.'''
-    def __init__(self, checkCallback, setCallback, rooms=[], obj=[]):
+    def __init__(self, rooms=[], obj=[]):
         '''Inicializador de clase, recibe como parametros obligatorios las funciones
         para setear y checkear los estados de los objetos, y como parametros opcionales
         una lista de habitaciones y otra de objetos, siendo posible en todo momento
         agregar o quitar elementos de las mismas.
         '''
-        self.check = checkCallback
-        self.set = setCallback
         self.rooms = rooms
         self.obj = obj
         self.lastAction, self.lastRoom, self.lastState, self.lastObjetct = '','','',''
         self.action, self.room, self.dia, self.hour, self.object, self.state = '','','','','',''
         self.event = ''
 
-    def addRoom(self,room):
+    def addRoom(self, room):
         '''Agrego habitaciones.'''
         self.rooms.append(room)
 
-    def addObj(self,obj):
+    def addObj(self, obj):
         '''Agrego objetos.'''
         self.obj.append(obj)
 
-    def removeRoom(self,room):
+    def removeRoom(self, room):
         '''Remuevo habitaciones.'''
         try:
             self.rooms.remove(room)

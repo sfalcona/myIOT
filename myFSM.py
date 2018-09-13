@@ -21,11 +21,11 @@ class myFSM:
         '''Asigno constructor a los calls.'''
         self.__init__()
     
-    def addState(self,name):
+    def addState(self, name):
         '''Funcion para agregar estados a la fsm'''
         self.states[name] = []
     
-    def addPath(self,name,path):
+    def addPath(self, name, path):
         '''Funcion para agregar ramales a cada estado, con formato myOptions'''
         self.states[name].append(path)
         
@@ -49,7 +49,7 @@ class myFSM:
         for i in self.states[self.currState]:
             print("\t %s si me llega %s" % (i.nextState, i.event))
     
-    def run(self,event):
+    def run(self, event):
         '''Corro la FSM, partiendo de un estado actual y viendo el evento recibido.'''
         invalidEvent = True
         if self.currState == None:

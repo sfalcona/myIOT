@@ -35,7 +35,7 @@ def espObj2EspAcc():
 
 # Callbacks para mqtt ( en este caso checkCallback es  messageCallback)
 def checkCallback():
-    messageCallback()
+
 
 def setCallback(): # Aca tambien tengo quilombos por que el seteo necesita parametros y el callback no recibe
     # Aca iria un mqttClient.publish(algo)
@@ -101,7 +101,6 @@ class S(http.server.BaseHTTPRequestHandler):
         self.data_string = self.rfile.read(int(self.headers['Content-Length']))
 
         self.send_response(200)
-        #self.end_headers()
         data = simplejson.loads(self.data_string)
         with open("myFulfillment.json", "w") as outfile:
             simplejson.dump(data, outfile)
@@ -118,7 +117,6 @@ def run(server_class=http.server.HTTPServer, handler_class=S, port=80):
     httpd = server_class(server_address, handler_class)
     print ('Server starting at ' + str(server_address[0]) + ':' + str(port))
     httpd.serve_forever()
-
 
 if __name__ == "__main__":
     from sys import argv
