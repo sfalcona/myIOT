@@ -4,10 +4,10 @@ Cosas para hacer
 Cambios
 ---------------
 * ~~Divertirse~~
-* ~~ Cambiar los objs y rooms por 1 dict en jsonParser (F)  ~~**17/09**
+* ~~Cambiar los objs y rooms por 1 dict en jsonParser (F)~~**17/09**
 * Que los callbacks recibar un solo diccionario, con key = room y value = obj (F) **17/09**
 * Emprolijar codigo PEP8 (F) **17/09**
-* Disenar el server HTTP cuasi de 0 (F) **17/09**
+* ~~Disenar el server HTTP cuasi de 0 (F)~~ **17/09**
 * Testear/ terminar server mqtt (M) **20/09**
 
 

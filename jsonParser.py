@@ -27,8 +27,10 @@ class myDiaLogic:
         '''Elimino objeto'''
         try:
             self.objs[room].remove(obj)
+        except KeyError:
+            print('No se encuentra la habitacion %s' % room)
         except ValueError:
-            print('No se encuentra el objeto en dicha habitacion')
+            print('No se encuentra el objeto %s en la habitacion %s' % (room, obj))
 
     def queryParser(self, jsonObj):
         '''Levanto informacion util del json correspondiente al fulfillment.

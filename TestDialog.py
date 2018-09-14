@@ -89,16 +89,12 @@ class S(http.server.BaseHTTPRequestHandler):
 
     def do_POST(self):
         self._set_headers()
-        print ("in post method")
         self.data_string = self.rfile.read(int(self.headers['Content-Length']))
-
-        self.send_response(200)
+        #self.send_response(200)
         data = simplejson.loads(self.data_string)
         with open("myFulfillment.json", "w") as outfile:
             simplejson.dump(data, outfile)
-
-        jsonPPrint("myFulfillment.json")
-        # print ("{}".format(data))
+        #jsonPPrint("myFulfillment.json")
         f = open("response.json")
         self.wfile.write(f.read().encode())
         return
