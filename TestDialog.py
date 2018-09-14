@@ -16,9 +16,9 @@ topic = ''
 msg = ''
 
 def messageCallback(client, userdata, message):
-    topic = message.topic
-    msg = message.payload
-
+    userdata.topic = message.topic
+    userdata.msg = message.payload
+    return userdata
 
 # Callbacks para la FSM
 def idle2EspObj():
@@ -33,13 +33,6 @@ def espObj2EspObj():
 
 def espObj2EspAcc():
 
-# Callbacks para mqtt ( en este caso checkCallback es  messageCallback)
-def checkCallback():
-
-
-def setCallback(): # Aca tambien tengo quilombos por que el seteo necesita parametros y el callback no recibe
-    # Aca iria un mqttClient.publish(algo)
-    
 
 
 # Una vez definidos los callbacks y el IP creo el cliente
@@ -90,7 +83,6 @@ class S(http.server.BaseHTTPRequestHandler):
         self._set_headers()
         f = open("GETResponse.html", "r")
         self.wfile.write(f.read().encode())
-        # self.wfile.write("<!DOCTYPE html><html><head><title>Page Title</title></head><body><h1>My First Heading</h1><p>My first paragraph.</p></body><html>".encode())
 
     def do_HEAD(self):
         self._set_headers()
@@ -112,8 +104,8 @@ class S(http.server.BaseHTTPRequestHandler):
         return
 
 
-def run(server_class=http.server.HTTPServer, handler_class=S, port=80):
-    server_address = ('localhost', port)
+def run(server_class=http.server.HTTPServer, handler_class=S, server = 'localhost', port=80):
+    server_address = (server, port)
     httpd = server_class(server_address, handler_class)
     print ('Server starting at ' + str(server_address[0]) + ':' + str(port))
     httpd.serve_forever()
@@ -121,8 +113,10 @@ def run(server_class=http.server.HTTPServer, handler_class=S, port=80):
 if __name__ == "__main__":
     from sys import argv
 
-
-if len(argv) == 2:
-    run(port=int(argv[1]))
+if len(argv) == 3:
+    run(server=argv[1], port=int(argv[2]))
 else:
     run()
+
+
+

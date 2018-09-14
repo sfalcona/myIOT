@@ -4,41 +4,31 @@ import json
 
 class myDiaLogic:
     '''Generador de respuestas para Fulfillments de Dialogflow.'''
-    def __init__(self, rooms=[], obj=[]):
+    def __init__(self, objs = {}):
         '''Inicializador de clase, recibe como parametros obligatorios las funciones
         para setear y checkear los estados de los objetos, y como parametros opcionales
         una lista de habitaciones y otra de objetos, siendo posible en todo momento
         agregar o quitar elementos de las mismas.
         '''
-        self.rooms = rooms
-        self.obj = obj
+        self.objs = objs
         self.lastAction, self.lastRoom, self.lastState, self.lastObjetct = '','','',''
         self.action, self.room, self.dia, self.hour, self.object, self.state = '','','','','',''
         self.event = ''
 
-    def addRoom(self, room):
-        '''Agrego habitaciones.'''
-        self.rooms.append(room)
-
-    def addObj(self, obj):
-        '''Agrego objetos.'''
-        self.obj.append(obj)
-
-    def removeRoom(self, room):
-        '''Remuevo habitaciones.'''
+    def addObj(self, room, obj):
+        '''Agrego objeto con habitacion'''
         try:
-            self.rooms.remove(room)
-            return 1
-        except ValueError:
-            return 'Room not in list.'
+            self.objs[room].append(obj)
+        except KeyError:
+            self.objs[room] = []
+            self.objs[room].append(obj)
 
-    def removeObj(self,Obj):
-        '''Remuevo objetos.'''
+    def remObj(self, room, obj):
+        '''Elimino objeto'''
         try:
-            self.Obj.remove(Obj)
-            return 1
+            self.objs[room].remove(obj)
         except ValueError:
-            return 'Object not in list.'
+            print('No se encuentra el objeto en dicha habitacion')
 
     def queryParser(self, jsonObj):
         '''Levanto informacion util del json correspondiente al fulfillment.
