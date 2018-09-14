@@ -11,3 +11,5 @@ def idle2EsperandoOtroObjeto(room, obj):
 def idle2EsperandoAccion(room, obj):
 	''' Tengo que obtener el estado en el que está el objeto en el room ingresado
 		y enviar el estado obtenido'''
+
+def esperandoObjeto2EsperandoAccion(room, obj):
