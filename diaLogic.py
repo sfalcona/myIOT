@@ -3,15 +3,16 @@ import json
 
 class myDiaLogic:
     '''Generador de respuestas para Fulfillments de Dialogflow.'''
-    def __init__(self, objs = {}):
+
+    def __init__(self, objs={}):
         '''Inicializador de clase, recibe como parametros obligatorios las funciones
         para setear y checkear los estados de los objetos, y como parametros opcionales
         una lista de habitaciones y otra de objetos, siendo posible en todo momento
         agregar o quitar elementos de las mismas.
         '''
         self.objs = objs
-        self.lastAction, self.lastRoom, self.lastState, self.lastObjetct = '','','',''
-        self.action, self.room, self.dia, self.hour, self.object, self.state = '','','','','',''
+        self.lastAction, self.lastRoom, self.lastState, self.lastObjetct = '', '', '', ''
+        self.action, self.room, self.dia, self.hour, self.object, self.state = '', '', '', '', '', ''
         self.event = ''
 
     def addObj(self, room, obj):
@@ -33,17 +34,17 @@ class myDiaLogic:
 
     def checkObj(self, room, obj=None):
         '''Funcion para verificar que el objeto a utilizar sea valido'''
-        if obj = None:
+        if obj == None:
             return room in self.objs
         else:
             return obj in self.objs[room]
 
     def queryParser(self, jsonObj):
         '''Levanto informacion util del json correspondiente al fulfillment.
-	Para cada campo me fijo si el query esta vacio o no, y en el caso de estarlo
-	le asigno el ultimo valor recibido, con el fin de poder generar dialogos un poco 
-	mas dinamicos.
-	'''
+        Para cada campo me fijo si el query esta vacio o no, y en el caso de estarlo
+        le asigno el ultimo valor recibido, con el fin de poder generar dialogos un poco 
+        mas dinamicos.
+        '''
         try:
             self.action = jsonObj["queryResult"]["parameters"]['Acciones']
             self.event = 'Accion'
@@ -70,16 +71,15 @@ class myDiaLogic:
             self.state = jsonObj["queryResult"]["parameters"]['Estados']
         except KeyError:
             self.state = self.lastState
-        self.lastAction, self.lastRoom, self.lastState, self.lastObject = self.action, self.room, self.state,self.object
-        
+        self.lastAction, self.lastRoom, self.lastState, self.lastObject = self.action, self.room, self.state, self.object
+
     def responseCreator(self):
         '''Diseno el contenido a enviar como respuesta en un request POST para continuar el dialogo con la aplicacion.'''
         response = {"fulfillmentText": "Esto es un mensaje nuevo"}
-		
 
 
 # Ejemplo de json recibido
-#Esto de acá lo comenté ayer porque parecía que solo era un ejemplo de como está estructurado el json
+# Esto de acá lo comenté ayer porque parecía que solo era un ejemplo de como está estructurado el json
 
 
 '''
@@ -124,4 +124,4 @@ myData = {
 }'''
 
 
-#print(myData[queryResult.parameters.Acciones])
+# print(myData[queryResult.parameters.Acciones])
