@@ -16,7 +16,7 @@ Nuevos
 ---------------
 * Crear un logger local (M) **20/09**
 * Hacer todos los callbacks en un archivo nuevo (B) **21/09**
-* Hacer una pagina/algo que responda a los GET (F) **28/09**
+* ~~Hacer una pagina/algo que responda a los GET (F)~~ **28/09**
 * Testear todo (TODOS) **Continuo**
 
 

@@ -43,7 +43,6 @@ import os
 # def espObj2EspAcc():
 
 
-
 #     # Una vez definidos los callbacks y el IP creo el cliente
 # mqttClient = mqttDriver.mqttClient(mqttIp, messageCallback)
 
@@ -100,42 +99,48 @@ class S(http.server.BaseHTTPRequestHandler):
             self.wfile.write(f.read().encode())
             f.close()
         if(self.path.endswith('.png')):
-            f=open(os.path.dirname(os.path.abspath(__file__)) + self.path , 'rb')
+            f = open(os.path.dirname(
+                os.path.abspath(__file__)) + self.path, 'rb')
             self.send_response(200)
             self.send_header('Content-type', 'image/png')
             self.end_headers()
             self.wfile.write(f.read())
             f.close()
         if(self.path.endswith('.jpg')):
-            f=open(os.path.dirname(os.path.abspath(__file__)) + self.path , 'rb')
+            f = open(os.path.dirname(
+                os.path.abspath(__file__)) + self.path, 'rb')
             self.send_response(200)
             self.send_header('Content-type', 'image/jpg')
             self.end_headers()
             self.wfile.write(f.read())
             f.close()
         if(self.path.endswith('.js')):
-            f=open(os.path.dirname(os.path.abspath(__file__)) + self.path , 'rb')
+            f = open(os.path.dirname(
+                os.path.abspath(__file__)) + self.path, 'rb')
             self.send_response(200)
             self.send_header('Content-type', 'text/javascript')
             self.end_headers()
             self.wfile.write(f.read())
             f.close()
         if(self.path.endswith('.css')):
-            f=open(os.path.dirname(os.path.abspath(__file__)) + self.path , 'rb')
+            f = open(os.path.dirname(
+                os.path.abspath(__file__)) + self.path, 'rb')
             self.send_response(200)
             self.send_header('Content-type', 'text/css')
             self.end_headers()
             self.wfile.write(f.read())
             f.close()
         if(self.path.endswith('.woff')):
-            f=open(os.path.dirname(os.path.abspath(__file__)) + self.path , 'rb')
+            f = open(os.path.dirname(
+                os.path.abspath(__file__)) + self.path, 'rb')
             self.send_response(200)
             self.send_header('Content-type', 'application/x-font-woff')
             self.end_headers()
             self.wfile.write(f.read())
             f.close()
         if(self.path.endswith('.ico')):
-            f=open(os.path.dirname(os.path.abspath(__file__)) + self.path , 'rb')
+            f = open(os.path.dirname(
+                os.path.abspath(__file__)) + self.path, 'rb')
             self.send_response(200)
             self.send_header('Content-type', 'image/ico')
             self.end_headers()
@@ -175,5 +180,3 @@ if len(argv) == 3:
     print(argv[1])
 else:
     run()
-    
-
