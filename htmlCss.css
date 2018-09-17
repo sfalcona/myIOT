@@ -1,0 +1,52 @@
+@import "bourbon";
+
+$col-secondary: #edc405;
+
+body {
+    background-color: #02111b;
+}
+
+.logo {
+    margin: 50px auto;
+    text-align: center;
+
+    a {
+    text-decoration: none;
+    @include transform(perspective(2.5em) rotateX(15deg) scaleY(0.8));
+    @include transition(all 0.5s);
+
+    display: inline-block;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 75px;
+    font-weight: 700;
+    font-family: 'Exo 2';
+    line-height: 0.8;
+
+    color: lighten($col-secondary, 10%);
+
+    text-shadow: 0 -1px 15px rgba(0,0,0,0.9),
+                  0 1px 0 adjust-hue(darken($col-secondary, 22%), -3deg),
+                   0 3px 0 adjust-hue(darken($col-secondary, 21%), -3deg),
+                   0 5px 0 adjust-hue(darken($col-secondary, 20%), -3deg),
+                   0 7px 0 adjust-hue(darken($col-secondary, 19%), -3deg),
+                   0 9px 0 adjust-hue(darken($col-secondary, 18%), -3deg),
+                    0 6px 50px transparentize(lighten($col-secondary, 20%), 0.2);
+
+    &:first-line {
+      font-size: 0.8em;
+    }
+
+    &:hover {
+      @include transform(perspective(8em) rotateX(11deg) scale(1.2));
+
+      text-shadow: 0 -1px 15px black,
+                    0 1px 0 adjust-hue(darken($col-secondary, 22%), -3deg),
+                     0 2px 0 adjust-hue(darken($col-secondary, 21%), -3deg),
+                     0 0px 0 adjust-hue(darken($col-secondary, 20%), -3deg),
+                     0 1px 0 adjust-hue(darken($col-secondary, 19%), -3deg),
+                     0 2px 0 adjust-hue(darken($col-secondary, 18%), -3deg),
+                      0 2px 30px transparentize(lighten($col-secondary, 20%), 0.4);
+        }
+    }
+}
