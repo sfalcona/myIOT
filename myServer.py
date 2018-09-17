@@ -5,78 +5,79 @@ import simplejson
 import json
 import random
 import myFSM
-import jsonParser
+import diaLogic
 import mqttDriver
+import os
 
 
-mqttIp = 'ACA PONGO LA IP'
+# mqttIp = 'ACA PONGO LA IP'
 
-# Callback para mensajes de mqtt, todavia no se bien como armar este callback jaja xd
-topic = ''
-msg = ''
+# # Callback para mensajes de mqtt, todavia no se bien como armar este callback jaja xd
+# topic = ''
+# msg = ''
 
 
-def messageCallback(client, userdata, message):
-    userdata.topic = message.topic
-    userdata.msg = message.payload
-    return userdata
+# def messageCallback(client, userdata, message):
+#     userdata.topic = message.topic
+#     userdata.msg = message.payload
+#     return userdata
 
 # Callbacks para la FSM
 
 
-def idle2EspObj():
+# def idle2EspObj():
 
 
-def idle2EspAcc():
+# def idle2EspAcc():
 
 
-def espAcc2EspAcc():
+# def espAcc2EspAcc():
 
 
-def espAcc2EspObj():
+# def espAcc2EspObj():
 
 
-def espObj2EspObj():
+# def espObj2EspObj():
 
 
-def espObj2EspAcc():
+# def espObj2EspAcc():
 
 
 
-    # Una vez definidos los callbacks y el IP creo el cliente
-mqttClient = mqttDriver.mqttClient(mqttIp, messageCallback)
+#     # Una vez definidos los callbacks y el IP creo el cliente
+# mqttClient = mqttDriver.mqttClient(mqttIp, messageCallback)
 
-# Una vez definidos los callbacks genero la FSM
-myLogic = jsonParser.myDiaLogic(
-    checkCallback=checkCallback, setCallback=setCallback)
-FSM = myFSM.myFSM()
+# # Una vez definidos los callbacks genero la FSM
+# myLogic = jsonParser.myDiaLogic(
+#     checkCallback=checkCallback, setCallback=setCallback)
+# FSM = myFSM.myFSM()
 
-# Creo estados
-FSM.addState('Idle')
-FSM.addState('EsperoAccion')
-FSM.addState('EsperoObjeto')
+# # Creo estados
+# FSM.addState('Idle')
+# FSM.addState('EsperoAccion')
+# FSM.addState('EsperoObjeto')
 
-# Creo eventos para Idle
-FSM.addPath('Idle', myFSM.myOptions('Pregunta', callBack1, 'EsperoAccion'))
-FSM.addPath('Idle', myFSM.myOptions('Accion', callBack2, 'EsperoObjeto'))
+# # Creo eventos para Idle
+# FSM.addPath('Idle', myFSM.myOptions('Pregunta', callBack1, 'EsperoAccion'))
+# FSM.addPath('Idle', myFSM.myOptions('Accion', callBack2, 'EsperoObjeto'))
 
-# Creo eventos para EsperoAccion
+# # Creo eventos para EsperoAccion
 
-FSM.addPath('EsperoAccion', myFSM.myOptions(
-    'Accion', callBack2, 'EsperoObjeto'))
-FSM.addPath('EsperoAccion', myFSM.myOptions(
-    'Pregunta', callBack1, 'EsperoAccion'))
+# FSM.addPath('EsperoAccion', myFSM.myOptions(
+#     'Accion', callBack2, 'EsperoObjeto'))
+# FSM.addPath('EsperoAccion', myFSM.myOptions(
+#     'Pregunta', callBack1, 'EsperoAccion'))
 
-# Creo eventos para EsperoObjeto
+# # Creo eventos para EsperoObjeto
 
-FSM.addPath('EsperoObjeto', myFSM.myOptions(
-    'Accion', callBack2, 'EsperoObjeto'))
-FSM.addPath('EsperoObjeto', myFSM.myOptions(
-    'Pregunta', callBack1, 'EsperoAccion'))
+# FSM.addPath('EsperoObjeto', myFSM.myOptions(
+#     'Accion', callBack2, 'EsperoObjeto'))
+# FSM.addPath('EsperoObjeto', myFSM.myOptions(
+#     'Pregunta', callBack1, 'EsperoAccion'))
 
 
-# Testeo commit desde PC
-FSM.printFSM()
+# # Testeo commit desde PC
+# FSM.printFSM()
 
 
 def jsonPPrint(filename):
@@ -88,21 +89,66 @@ def jsonPPrint(filename):
 class S(http.server.BaseHTTPRequestHandler):
     '''Servidor HTTP'''
 
-    def _set_headers(self):
-        self.send_response(200)
-        self.send_header('Content-type', 'text/html')
-        self.end_headers()
-
     def do_GET(self):
-        self._set_headers()
-        f = open("GETResponse.html", "r")
-        self.wfile.write(f.read().encode())
+        print(self.path)
+        if(self.path.endswith('/')):
+            self.send_response(200)
+            self.send_header('Content-type', 'text/html')
+            self.end_headers()
+            print('Me llego vacio, imprimo la pagina')
+            f = open("myPag.htm", "r", encoding="utf8")
+            self.wfile.write(f.read().encode())
+            f.close()
+        if(self.path.endswith('.png')):
+            f=open(os.path.dirname(os.path.abspath(__file__)) + self.path , 'rb')
+            self.send_response(200)
+            self.send_header('Content-type', 'image/png')
+            self.end_headers()
+            self.wfile.write(f.read())
+            f.close()
+        if(self.path.endswith('.jpg')):
+            f=open(os.path.dirname(os.path.abspath(__file__)) + self.path , 'rb')
+            self.send_response(200)
+            self.send_header('Content-type', 'image/jpg')
+            self.end_headers()
+            self.wfile.write(f.read())
+            f.close()
+        if(self.path.endswith('.js')):
+            f=open(os.path.dirname(os.path.abspath(__file__)) + self.path , 'rb')
+            self.send_response(200)
+            self.send_header('Content-type', 'text/javascript')
+            self.end_headers()
+            self.wfile.write(f.read())
+            f.close()
+        if(self.path.endswith('.css')):
+            f=open(os.path.dirname(os.path.abspath(__file__)) + self.path , 'rb')
+            self.send_response(200)
+            self.send_header('Content-type', 'text/css')
+            self.end_headers()
+            self.wfile.write(f.read())
+            f.close()
+        if(self.path.endswith('.woff')):
+            f=open(os.path.dirname(os.path.abspath(__file__)) + self.path , 'rb')
+            self.send_response(200)
+            self.send_header('Content-type', 'application/x-font-woff')
+            self.end_headers()
+            self.wfile.write(f.read())
+            f.close()
+        if(self.path.endswith('.ico')):
+            f=open(os.path.dirname(os.path.abspath(__file__)) + self.path , 'rb')
+            self.send_response(200)
+            self.send_header('Content-type', 'image/ico')
+            self.end_headers()
+            self.wfile.write(f.read())
+            f.close()
 
     def do_HEAD(self):
         self._set_headers()
 
     def do_POST(self):
-        self._set_headers()
+        self.send_response(200)
+        self.send_header('Content-type', 'text/html')
+        self.end_headers()
         self.data_string = self.rfile.read(int(self.headers['Content-Length']))
         # self.send_response(200)
         data = simplejson.loads(self.data_string)

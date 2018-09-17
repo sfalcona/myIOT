@@ -11,7 +11,7 @@ mqttc.on_message = on_message
 
 '''
 
-class mqttClient(self):
+class mqttClient():
 	'''Servidor de mqtt utilizando la biblioteca paho. No gano mucho, es muy basado en la 
 	biblioteca.
 	'''
@@ -33,7 +33,7 @@ class mqttClient(self):
 		MQTT_ERR_NO_CONN si no hay conexion 
 		MQTT_ERR_QUEUE_SIZE si el mensaje no entro en queue ni se envio
 		'''
-		return = mqtt.publish(topic, payload, qos, retain)
+		return mqtt.publish(topic, payload, qos, retain)
 
 	def subscribe(self, topic, qos = 0):
 		'''Me subscribo a un topico'''
@@ -43,4 +43,6 @@ class mqttClient(self):
 		'''Cancelo subscripcion a un topico'''
 		mqtt.unsubscribe(topic, qos)
 
+	def __init__(self, serverIp, serverPort = 1883, userName = 'RPi', messageCallback = None):
+		self.setClient(self, serverIp, serverPort = 1883, userName = 'RPi', messageCallback = None)
 
