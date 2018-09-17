@@ -172,6 +172,7 @@ if __name__ == "__main__":
 
 if len(argv) == 3:
     run(server=argv[1], port=int(argv[2]))
+    print(argv[1])
 else:
     run()
     
