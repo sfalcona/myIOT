@@ -88,64 +88,46 @@ def jsonPPrint(filename):
 class S(http.server.BaseHTTPRequestHandler):
     '''Servidor HTTP'''
 
+    def get_File(self, mime):
+        self.send_response(200)
+        self.send_header('Content-type', mime)
+        self.end_headers()
+        f = open(os.path.dirname(
+            os.path.abspath(__file__)) + self.path, 'rb')
+        self.wfile.write(f.read())
+        f.close()
+
     def do_GET(self):
+        '''Callback para GETs'''
         print(self.path)
         if(self.path.endswith('/')):
             self.send_response(200)
             self.send_header('Content-type', 'text/html')
             self.end_headers()
-            print('Me llego vacio, imprimo la pagina')
             f = open("myPag.htm", "r", encoding="utf8")
             self.wfile.write(f.read().encode())
             f.close()
+
         if(self.path.endswith('.png')):
-            f = open(os.path.dirname(
-                os.path.abspath(__file__)) + self.path, 'rb')
-            self.send_response(200)
-            self.send_header('Content-type', 'image/png')
-            self.end_headers()
-            self.wfile.write(f.read())
-            f.close()
+            self.get_File('image/png')
+
         if(self.path.endswith('.jpg')):
-            f = open(os.path.dirname(
-                os.path.abspath(__file__)) + self.path, 'rb')
-            self.send_response(200)
-            self.send_header('Content-type', 'image/jpg')
-            self.end_headers()
-            self.wfile.write(f.read())
-            f.close()
+            self.get_File('image/jpg')
+
         if(self.path.endswith('.js')):
-            f = open(os.path.dirname(
-                os.path.abspath(__file__)) + self.path, 'rb')
-            self.send_response(200)
-            self.send_header('Content-type', 'text/javascript')
-            self.end_headers()
-            self.wfile.write(f.read())
-            f.close()
+            self.get_File('text/javascript')
+
         if(self.path.endswith('.css')):
-            f = open(os.path.dirname(
-                os.path.abspath(__file__)) + self.path, 'rb')
-            self.send_response(200)
-            self.send_header('Content-type', 'text/css')
-            self.end_headers()
-            self.wfile.write(f.read())
-            f.close()
+            self.get_File('text/css')
+
         if(self.path.endswith('.woff')):
-            f = open(os.path.dirname(
-                os.path.abspath(__file__)) + self.path, 'rb')
-            self.send_response(200)
-            self.send_header('Content-type', 'application/x-font-woff')
-            self.end_headers()
-            self.wfile.write(f.read())
-            f.close()
+            self.get_File('application/x-font-woff')
+
         if(self.path.endswith('.ico')):
-            f = open(os.path.dirname(
-                os.path.abspath(__file__)) + self.path, 'rb')
-            self.send_response(200)
-            self.send_header('Content-type', 'image/ico')
-            self.end_headers()
-            self.wfile.write(f.read())
-            f.close()
+            self.get_File('image/ico')
+
+        if(self.path.endswith('.pdf')):
+            self.get_File('application/pdf')
 
     def do_HEAD(self):
         self._set_headers()
