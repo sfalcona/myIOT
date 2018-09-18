@@ -18,6 +18,7 @@ Nuevos
 * Hacer todos los callbacks en un archivo nuevo (B) **21/09**
 * ~~Hacer una pagina/algo que responda a los GET (F)~~ **28/09**
 * Testear todo (TODOS) **Continuo**
+* Implementar sistema de usuarios (F) **No se**
 
 
 A Futuro

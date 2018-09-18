@@ -100,34 +100,44 @@ class S(http.server.BaseHTTPRequestHandler):
     def do_GET(self):
         '''Callback para GETs'''
         print(self.path)
-        if(self.path.endswith('/')):
-            self.send_response(200)
-            self.send_header('Content-type', 'text/html')
-            self.end_headers()
-            f = open("myPag.htm", "r", encoding="utf8")
-            self.wfile.write(f.read().encode())
-            f.close()
+        try:
+            if(self.path.endswith('/')):
+                self.send_response(200)
+                self.send_header('Content-type', 'text/html')
+                self.end_headers()
+                f = open("myPag.htm", "r", encoding="utf8")
+                self.wfile.write(f.read().encode())
+                f.close()
 
-        if(self.path.endswith('.png')):
-            self.get_File('image/png')
+            elif(self.path.endswith('.png')):
+                self.get_File('image/png')
 
-        if(self.path.endswith('.jpg')):
-            self.get_File('image/jpg')
+            elif(self.path.endswith('.htm')):
+                self.get_File('text/html')
 
-        if(self.path.endswith('.js')):
-            self.get_File('text/javascript')
+            elif(self.path.endswith('.jpg')):
+                self.get_File('image/jpg')
 
-        if(self.path.endswith('.css')):
-            self.get_File('text/css')
+            elif(self.path.endswith('.js')):
+                self.get_File('text/javascript')
 
-        if(self.path.endswith('.woff')):
-            self.get_File('application/x-font-woff')
+            elif(self.path.endswith('.css')):
+                self.get_File('text/css')
 
-        if(self.path.endswith('.ico')):
-            self.get_File('image/ico')
+            elif(self.path.endswith('.woff')):
+                self.get_File('application/x-font-woff')
 
-        if(self.path.endswith('.pdf')):
-            self.get_File('application/pdf')
+            elif(self.path.endswith('.ico')):
+                self.get_File('image/ico')
+
+            elif(self.path.endswith('.pdf')):
+                self.get_File('application/pdf')
+            else:
+                self.send_error(
+                    403, "Forbidden File, Format Not Supported {}".format(self.path))
+
+        except FileNotFoundError:
+            self.send_error(404, "File Not Found {}".format(self.path))
 
     def do_HEAD(self):
         self._set_headers()
