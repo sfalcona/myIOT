@@ -1,34 +1,61 @@
 import sqlite3
+import os
 
-
-connection = sqlite3.connect("company.db")
-
+print(os.path.realpath(os.path.dirname(
+    os.path.abspath(__file__)) + "/myDB/myUsers.db"))
+connection = sqlite3.connect(os.path.realpath(
+    os.path.dirname(os.path.abspath(__file__)) + "/myDB/myUsers.db"))
 cursor = connection.cursor()
 
-# delete
-#cursor.execute("""DROP TABLE employee;""")
+
+cursor.execute("""DROP TABLE users;""")
+cursor.execute("""DROP TABLE credentials;""")
 
 sql_command = """
-CREATE TABLE employee ( 
-staff_number INTEGER PRIMARY KEY, 
+CREATE TABLE users (  
+family VARCHAR(30),
 fname VARCHAR(20), 
-lname VARCHAR(30), 
-gender CHAR(1), 
-joining DATE,
-birth_date DATE);"""
-
+lname VARCHAR(30));"""
 cursor.execute(sql_command)
+print('Creating table')
 
-sql_command = """INSERT INTO employee (staff_number, fname, lname, gender, birth_date)
-    VALUES (NULL, "William", cipher.encrypt("Shakespeare"), "m", "1961-10-25");"""
+sql_command = """
+CREATE TABLE credentials ( 
+family VARCHAR(30),
+password VARCHAR(20));"""
 cursor.execute(sql_command)
+print('Creating table')
 
 
-sql_command = """INSERT INTO employee (staff_number, fname, lname, gender, birth_date)
-    VALUES (NULL, "Frank", "Schiller", "m", "1955-08-17");"""
-cursor.execute(sql_command)
+myUsers = [ ("Falconaro", "Sebastian", "Falconaro"),
+			("Falconaro","Bernardo", "Michel"),
+			("Milhas", "Sebastian", "Milhas")]
 
-# never forget this, if you want the changes to be saved:
+
+sql_command = """INSERT INTO users VALUES (?,?,?)"""
+cursor.executemany(sql_command, myUsers)
 connection.commit()
+
+myCred = [	('Falconaro', 'Milhastrolo'),
+			('Milhas', 'FalconaroCapo')]
+
+
+sql_command = """INSERT INTO credentials VALUES (?,?)"""
+cursor.executemany(sql_command, myCred)
+connection.commit()
+
+
+
+sql_command = """
+SELECT lname 
+FROM users
+INNER JOIN credentials ON users.family = credentials.family
+WHERE fname = ? 
+"""
+
+cursor.execute(sql_command,('Sebastian',) )
+
+print(cursor.fetchall())
+
 
 connection.close()
