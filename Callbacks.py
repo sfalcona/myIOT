@@ -1,7 +1,7 @@
 import mqttDriver
 import json
 
-
+#hola
 
 def idle2EsperandoOtroObjeto(room, obj, accion):
 	'''Tengo que generar la acción en el room y obj que tienen como párametro
