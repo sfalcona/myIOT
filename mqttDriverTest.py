@@ -1,8 +1,7 @@
 import mqttDriver
-import time
 
 def cocinaCallback(client, userdata, message):
-	print("hola como andas, me llego esto del baño: ", str(message.payload.decode("utf-8")))
+	print("hola como andas, me llego esto de la cocina: ", str(message.payload.decode("utf-8")))
 
 jorge = mqttDriver.mqttClient("localhost")
 jorge.subscribe("casa")

@@ -1,4 +1,7 @@
 import paho.mqtt.client as mqtt
+import configparser
+import logging
+import logging.config
 
 # Ejemplo de callback
 
@@ -29,6 +32,8 @@ class mqttClient():
 		self.myClient.connect(serverIp, serverPort, 60)
 		''' Incializo el thread que se encarga de los callbacks cuando me llega un mensaje de un tópico al que este subscripto el cliente'''
 		self.myClient.loop_start()
+		''' Inicializo el logger predeterminado de paho'''
+		self.myClient.enable_logger(self.logger)
 		
 		
 		return self.myClient
@@ -63,5 +68,10 @@ class mqttClient():
 
 
 	def __init__(self, serverIp, serverPort = 1883, userName = 'RPi'):
+		self.config = configparser.ConfigParser()
+		self.config.read('mqttSettings.conf')
+		logging.config.fileConfig('mqttSettings.conf')
+		self.logger = logging.getLogger('mqtt')
+		self.logger.info('Inicializando...')
 		self.setClient(serverIp, serverPort, userName)
 
