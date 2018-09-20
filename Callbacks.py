@@ -28,7 +28,7 @@ def idle2EsperandoAccion(room, obj):
 	
 	#Espero la respuesta, esto puede ser un futuro callback
 	if cliente.suscribe(room + "/" + obj) == MQTT_ERR_SUCCESS:
-		while !esperandoRespuesta: #esperandoRespuesta tiene que modificarse cuando la ESP32 genera la respuesta con el estado del tópico que se publicó
+		while not esperandoRespuesta: #esperandoRespuesta tiene que modificarse cuando la ESP32 genera la respuesta con el estado del tópico que se publicó
 			if estado: #Tiene que guardar la respuesta en esta variable.
 				data = {"fullfilmentText": "Sí"}
 			else
